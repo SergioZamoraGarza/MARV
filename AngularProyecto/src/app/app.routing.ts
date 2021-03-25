@@ -6,7 +6,7 @@ import {Routes,RouterModule} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {BlogComponent} from './components/blog/blog.component';
 import {FormularioComponent} from './components/formulario/formulario.component';
-import {ArticleComponent} from './components/article/article.component';
+import {PeliculasComponent} from './components/peliculas/peliculas.component';
 import {PaginaComponent} from './components/pagina/pagina.component';
 import { ErrorComponent } from './components/error/error.component';
 
@@ -16,7 +16,7 @@ const appRoutes : Routes=[
     {path:'home',component:HomeComponent},
     {path:'blog',component:BlogComponent},
     {path:'formulario',component:FormularioComponent},
-    {path:'articles',component:ArticleComponent},
+    {path:'articles',component:PeliculasComponent},
     {path:'pagina-de-pruebas',component:PaginaComponent},
     {path:'pagina-de-pruebas/:nombre/:apellido',component:PaginaComponent},
     {path:'**',component:ErrorComponent}
