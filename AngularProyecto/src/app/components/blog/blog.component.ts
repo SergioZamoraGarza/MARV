@@ -19,7 +19,7 @@ export class BlogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this._articleService.getArticles().subscribe(
+   this._articleService.getArticles().subscribe(
       response=>{
         if(response.articles){
           this.articles=response.articles;
@@ -31,7 +31,7 @@ export class BlogComponent implements OnInit {
       error=>{
         console.log(error);
       }
-    ));
+   );
   }
 
 }

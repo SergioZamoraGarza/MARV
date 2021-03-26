@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {routing,appRoutingProviders} from './app.routing';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {MomentModule} from 'angular2-moment';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -17,6 +18,10 @@ import { PaginaComponent } from './components/pagina/pagina.component';
 import { ErrorComponent } from './components/error/error.component';
 import { PeliculaComponent } from './components/pelicula/pelicula.component';
 import {EsParPipe} from './pipes/espar.pipe';
+import { ArticleComponent } from './components/article/article.component';
+import { ArticuloComponent } from './components/articulo/articulo.component';
+import { SearchComponent } from './components/search/search.component';
+import { ArticleNewComponent } from './components/article-new/article-new.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +37,18 @@ import {EsParPipe} from './pipes/espar.pipe';
     PaginaComponent,
     ErrorComponent,
     PeliculaComponent,
-    EsParPipe
+    EsParPipe,
+    ArticleComponent,
+    ArticuloComponent,
+    SearchComponent,
+    ArticleNewComponent
   ],
   imports: [
     BrowserModule,
     routing,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MomentModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
