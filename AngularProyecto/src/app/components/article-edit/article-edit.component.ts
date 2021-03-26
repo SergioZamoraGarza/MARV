@@ -6,16 +6,18 @@ import {Global} from '../../services/global';
 import swal from 'sweetalert';
 
 @Component({
-  selector: 'app-article-new',
-  templateUrl: './article-new.component.html',
-  styleUrls: ['./article-new.component.css'],
+  selector: 'app-article-edit',
+  templateUrl: './article-edit.component.html',
+  styleUrls: ['./article-edit.component.css'],
   providers:[ArticleService]
 })
-export class ArticleNewComponent implements OnInit {
+export class ArticleEditComponent implements OnInit {
 
   public article:Article;
   public status:string;
+  public is_edit:boolean;
   public page_title:string;
+  public url:string;
 
   constructor(
     private _articleService:ArticleService,
@@ -24,37 +26,35 @@ export class ArticleNewComponent implements OnInit {
     ) 
     { 
       this.article = new Article('','','',null,null);
-      this.page_title="Crear Artículo";
+      this.is_edit=true;
+      this.page_title="Editar Artículo";
+      this.url=Global.url;
     }
 
   ngOnInit(): void {
+    this.getArticle();
   }
 
   onSubmit(){
-    this._articleService.create(this.article).subscribe(
+    this._articleService.update(this.article._id,this.article).subscribe(
       response=>{
         if(response.status=="success"){
           this.status="success";
           this.article=response.article;
-
-        //Alerta
+           //Alerta
         swal(
-          'Artículo creado!!!',
-          'El artículo se ha creado con exito',
+          'Artículo editado!!!',
+          'El artículo se ha editado con exito',
           'success'
         );
 
-          this._router.navigate(['/blog']);
+          this._router.navigate(['/blog/articulo',this.article._id]);
         }else{
           this.status="error";
         }
       },
       error=>{
-        swal(
-          'Edición fallida!!!',
-          'El artículo no se ha editado',
-          'error'
-        );
+        console.log(error);
         this.status='error';
       }
     )
@@ -63,6 +63,23 @@ export class ArticleNewComponent implements OnInit {
   imageUpload(data){
     let image_data=JSON.parse(data.response);
     this.article.image=image_data.image;
+  }
+
+  getArticle(){
+    this._route.params.subscribe(params=>{
+      let id= params['id'];
+
+      this._articleService.getArticle(id).subscribe(
+        response=>{
+          if(response.article){
+            this.article=response.article;
+          }
+        },
+        error=>{
+          this._router.navigate(['/home']);
+        }
+      );
+    });
   }
 
   afuConfig = {
